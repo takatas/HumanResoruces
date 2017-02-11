@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vektorel.hrapp.ui.emre;
 
 import com.vektorel.hrapp.entity.ayse.Cinsiyet;
@@ -25,12 +20,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author vektorel
+ * @author eaytac
  */
 public class frmCv extends javax.swing.JFrame {
 
     byte[] fotografDosyasi;
     String fotografDosyaAdresi;
+
     /**
      * Creates new form frmCv
      */
@@ -38,11 +34,11 @@ public class frmCv extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
+
     public frmCv(Cv cv) {
         initComponents();
         setLocationRelativeTo(null);
-        
+
         txtCvTanimi.setText(cv.getCvTanimi());
         lblId.setText(cv.getId().toString());
         txtAd.setText(cv.getAd());
@@ -50,28 +46,24 @@ public class frmCv extends javax.swing.JFrame {
         txtEposta.setText(cv.getEposta());
         txtTCKimlikNo.setText(cv.getTcKimlikNo().toString());
         txtDogumTarihi.setDate(cv.getDogumTarihi());
-        
-        JComboBox<Cinsiyet> cmbCinsiyet = new JComboBox();
+
+        JComboBox<Cinsiyet> cmbCinsiyet = new JComboBox(); //BU KISIM ÇALIŞMIYOR!!
         cmbCinsiyet.setModel(new DefaultComboBoxModel(cv.getCinsiyet().values()));
-                        
+
         txtAdres.setText(cv.getAdres());
-        
+
 //        cmbIl.setSelectedIndex(toIntExact(cv.getIl().getId()) - 1);
 //        cmbIlce.setSelectedIndex(toIntExact(cv.getIlce().getId()) - 1);
 //        cmbOkul.setSelectedIndex(toIntExact(cv.getOkul().getId()) - 1);
-
         Fotograf fotograf = cv.getFotograf();
         byte[] foto = fotograf.getImage();
         ImageIcon image = new ImageIcon(foto);
         Image im = image.getImage();
-        Image myImg = im.getScaledInstance(lblFotograf.getWidth(), lblFotograf.getHeight(),Image.SCALE_SMOOTH);
+        Image myImg = im.getScaledInstance(lblFotograf.getWidth(), lblFotograf.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon newImage = new ImageIcon(myImg);
         lblFotograf.setIcon(newImage);
     }
 
-    
-
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -319,15 +311,15 @@ public class frmCv extends javax.swing.JFrame {
             CvService cvService = new CvService();
             Cv cv = new Cv();
             Date date = new Date();
-            
+
             cv.setCvTanimi(txtCvTanimi.getText());
             cv.setAd(txtAd.getText());
             cv.setSoyad(txtSoyad.getText());
             cv.setEposta(txtEposta.getText());
             cv.setTcKimlikNo(new Long(txtTCKimlikNo.getText()));
             cv.setDogumTarihi(txtDogumTarihi.getDate());
-            
-            if (cv.getCvEklenmeTarihi() == null){ //Veritabanında iş başvuru tarihi yoksa kaydet
+
+            if (cv.getCvEklenmeTarihi() == null) { //Veritabanında iş başvuru tarihi yoksa kaydet
                 cv.setCvEklenmeTarihi(date); // Formun kaydedildiği tarih iş başvuru tarihi olarak kabul edilecek!
             }
 //            cv.setCinsiyet(cmbCinsiyet.getSelectedIndex());
@@ -335,18 +327,17 @@ public class frmCv extends javax.swing.JFrame {
 //            cv.setIl(cmbIl.getSelectedIndex());
 //            cv.setIlce(cmbIlce.getSelectedIndex());
 //            cv.setOkul(cmbOkul.getSelectedIndex());
-            
-                    
+
             //Fotoğrafı veritabanına kaydetme aşamaları
             FileInputStream fileInputStream = new FileInputStream(fotografDosyaAdresi);
             fileInputStream.read(fotografDosyasi);
             Path path = Paths.get(fotografDosyaAdresi);
             byte[] data = Files.readAllBytes(path);
-             Fotograf fotograf = new Fotograf();
+            Fotograf fotograf = new Fotograf();
             fotograf.setImage(data);
             cv.setFotograf(fotograf);
             fileInputStream.close();
-            
+
             //Kaydetme veya güncelleme işlemini yapalım.
             if (lblId.getText().equals("")) {
                 cvService.save(cv);
@@ -356,7 +347,7 @@ public class frmCv extends javax.swing.JFrame {
                 cvService.update(cv);
                 this.dispose();
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -387,7 +378,7 @@ public class frmCv extends javax.swing.JFrame {
         ImageIcon image = new ImageIcon(newImg);
         return image;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFotografSec;
     private javax.swing.JButton btnIptal;

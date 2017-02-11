@@ -9,6 +9,6 @@ package com.vektorel.hrapp.entity.takatas;
  *
  * @author vektorel
  */
-public class Ulke {
+public class Ulke  {
     
 }

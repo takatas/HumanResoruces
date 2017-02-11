@@ -17,7 +17,7 @@ public interface IBaseService<T> {
     
     boolean update(T entity) throws Exception;
     
-    boolean delete(T entity)throws Exception ;
+    boolean delete(T entity) throws Exception;
     
     List<T> getAll(String query);
     

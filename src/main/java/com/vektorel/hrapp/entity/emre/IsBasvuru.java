@@ -1,4 +1,3 @@
-
 package com.vektorel.hrapp.entity.emre;
 
 import com.vektorel.hrapp.entity.EBase;

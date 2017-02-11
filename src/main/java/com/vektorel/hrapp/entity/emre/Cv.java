@@ -2,6 +2,9 @@
 package com.vektorel.hrapp.entity.emre;
 
 import com.vektorel.hrapp.entity.EBase;
+import com.vektorel.hrapp.entity.ayse.Cinsiyet;
+import com.vektorel.hrapp.entity.deniz.Bolum;
+import com.vektorel.hrapp.entity.deniz.Okul;
 import com.vektorel.hrapp.entity.takatas.Il;
 import com.vektorel.hrapp.entity.takatas.Ilce;
 import java.util.Date;
@@ -26,17 +29,29 @@ import javax.persistence.TemporalType;
 @SequenceGenerator(allocationSize = 1,name = "default_id_generator",sequenceName = "seq_cv")
 public class Cv extends EBase {
     
-    private String ad;
-    private String soyad;
+    private String cvTanimi;
+    private String ad;           //Bu alan için kişi classı kullanılabilir
+    private String soyad;        //Bu alan için kişi classı kullanılabilir
     private String eposta;
-    private String adres;
-    private Long tcKimlikNo;
-    private Date dogumTarihi;
-    private Date isBasvuruTarihi;
-    private Enum cinsiyet;
+    private String adres;        //Bu alan için kişi classı kullanılabilir
+    private Long tcKimlikNo;     //Bu alan için kişi classı kullanılabilir
+    private Date dogumTarihi;    //Bu alan için kişi classı kullanılabilir
+    private Date cvEklenmeTarihi;
+    private Cinsiyet cinsiyet;   //Bu alan için kişi classı kullanılabilir
     private Fotograf fotograf;
     private Il il;
     private Ilce ilce;
+    private Okul okul;
+    private Bolum bolum;
+
+    @Column(name = "cv_tanimi", length=200)
+    public String getCvTanimi() {
+        return cvTanimi;
+    }
+
+    public void setCvTanimi(String cvTanimi) {
+        this.cvTanimi = cvTanimi;
+    }
 
     @Column(name = "ad",length = 100)
     public String getAd() {
@@ -94,21 +109,21 @@ public class Cv extends EBase {
     }
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "is_basvuru_tarihi")
-    public Date getIsBasvuruTarihi() {
-        return isBasvuruTarihi;
+    @Column(name = "cv_eklenme_tarihi")
+    public Date getCvEklenmeTarihi() {
+        return cvEklenmeTarihi;
     }
 
-    public void setIsBasvuruTarihi(Date isBasvuruTarihi) {
-        this.isBasvuruTarihi = isBasvuruTarihi;
+    public void setCvEklenmeTarihi(Date cvEklenmeTarihi) {
+        this.cvEklenmeTarihi = cvEklenmeTarihi;
     }
-    
-    @Column(name = "cinsiyet",length = 100)
-    public Enum getCinsiyet() {
+
+    @Column(name = "cinsiyet")
+    public Cinsiyet getCinsiyet() {
         return cinsiyet;
     }
 
-    public void setCinsiyet(Enum cinsiyet) {
+    public void setCinsiyet(Cinsiyet cinsiyet) {
         this.cinsiyet = cinsiyet;
     }
 
@@ -140,6 +155,26 @@ public class Cv extends EBase {
 
     public void setIlce(Ilce ilce) {
         this.ilce = ilce;
+    }
+
+    @JoinColumn(name = "okul_id")
+    @ManyToOne (fetch = FetchType.LAZY)
+    public Okul getOkul() {
+        return okul;
+    }
+
+    public void setOkul(Okul okul) {
+        this.okul = okul;
+    }
+
+    @JoinColumn(name = "bolum_id")
+    @ManyToOne (fetch = FetchType.LAZY)
+    public Bolum getBolum() {
+        return bolum;
+    }
+
+    public void setBolum(Bolum bolum) {
+        this.bolum = bolum;
     }
     
     

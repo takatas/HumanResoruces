@@ -1,0 +1,62 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.vektorel.hrapp.entity.taner;
+
+import com.vektorel.hrapp.entity.EBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+/**
+ *
+ * @author vektorel
+ */
+@Entity
+@Table(name = "gnl_kullanici")
+@SequenceGenerator(allocationSize = 1,name = "default_id_generator",sequenceName = "seq_kullanici")
+public class Kullanici extends EBase{
+    private String username;
+    private String pass;
+    private String email;
+    private String adSoyad;
+
+    @Column(name = "uname",length = 100,unique = true)
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Column(name = "pwd",length = 100)
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    @Column(name = "email",length = 150)
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Column(name = "ad_soyad",length = 200)
+    public String getAdSoyad() {
+        return adSoyad;
+    }
+
+    public void setAdSoyad(String adSoyad) {
+        this.adSoyad = adSoyad;
+    }    
+}

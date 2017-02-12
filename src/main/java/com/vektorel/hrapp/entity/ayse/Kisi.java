@@ -157,5 +157,10 @@ public class Kisi extends EBase{
     public void setYas(int yas) {
         this.yas = yas;
     }
+
+    @Override
+    public String toString() {
+        return "Kisi{" + "id=" + getId()  + "ad=" + ad + ", soyad=" + soyad + ", dogumTarihi=" + dogumTarihi + ", tc=" + tc + ", babaAdi=" + babaAdi + ", anaAdi=" + anaAdi + ", cinsiyet=" + cinsiyet + ", il=" + il + ", ilce=" + ilce + ", acikAdres=" + acikAdres + ", tel=" + tel + ", adSoyad=" + getAdSoyad() + ", yas=" + getYas() + '}';
+    }
     
 }

@@ -20,6 +20,18 @@ public class frmIlEkle extends javax.swing.JDialog {
     public frmIlEkle(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+    }
+    
+        frmIlEkle(java.awt.Frame parent, boolean modal, Il il) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        lblIlId.setText(il.getId().toString());
+        txtIlAd.setText(il.getAd());
+        txtIlKod.setText(il.getKod());
+
     }
 
     /**
@@ -106,11 +118,12 @@ public class frmIlEkle extends javax.swing.JDialog {
     private void btnIlKaydetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIlKaydetActionPerformed
         try {
             IlService ilService = new IlService();
-            if (lblIlId.getText() == null) {
+            if (lblIlId.getText().trim().equals("")) {
                 ilService.save(new Il(null, txtIlKod.getText(), txtIlAd.getText()));
             } else {
                 ilService.update(new Il(new Long(lblIlId.getText()), txtIlKod.getText(), txtIlAd.getText()));
             }
+            this.dispose();
 
         } catch (Exception e) {
             e.getMessage();

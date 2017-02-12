@@ -8,6 +8,8 @@ package com.vektorel.hrapp.ui.taner;
 import com.vektorel.hrapp.entity.taner.Kullanici;
 import com.vektorel.hrapp.service.taner.KullaniciService;
 import com.vektorel.hrapp.ui.frmAnasayfa;
+import java.awt.event.KeyEvent;
+import java.security.spec.KeySpec;
 import javax.swing.JOptionPane;
 
 /**
@@ -57,6 +59,12 @@ public class frmLogin extends javax.swing.JDialog {
         btnGiris.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGirisActionPerformed(evt);
+            }
+        });
+
+        txtKullaniciAdi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtKullaniciAdiKeyPressed(evt);
             }
         });
 
@@ -118,6 +126,13 @@ public class frmLogin extends javax.swing.JDialog {
             System.exit(0);
         }
     }//GEN-LAST:event_btnIptalActionPerformed
+
+    private void txtKullaniciAdiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKullaniciAdiKeyPressed
+          if (evt.getKeyCode()==KeyEvent.VK_F9){
+            frmKullaniciEkle ekle=new frmKullaniciEkle(null, true);
+            ekle.show();
+        }
+    }//GEN-LAST:event_txtKullaniciAdiKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

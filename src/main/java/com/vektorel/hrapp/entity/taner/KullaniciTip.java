@@ -27,5 +27,13 @@ public enum KullaniciTip {
     public void setLabel(String label) {
         this.label = label;
     }
-    
+ 
+    public static KullaniciTip getEnum(int i){
+        switch(i){
+            case 0 : return ADMIN;
+            case 1 : return IK_SORUMLUSU;
+            case 2 : return PERSONEL;
+        }
+        return ADMIN;
+    }
 }

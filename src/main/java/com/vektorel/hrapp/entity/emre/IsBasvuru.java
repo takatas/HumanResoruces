@@ -60,7 +60,7 @@ public class IsBasvuru extends EBase {
         this.basvuruYapilanCv = basvuruYapilanCv;
     }
 
-    @Column(name = "basvuru_yapilan_pozisyon_adi", length = 150)
+    @Column(name = "bsvyp_poz_adi", length = 150)
     public String getBasvuruYapilanPozisyonAdi() {
         return basvuruYapilanPozisyonAdi;
     }
@@ -69,7 +69,7 @@ public class IsBasvuru extends EBase {
         this.basvuruYapilanPozisyonAdi = basvuruYapilanPozisyonAdi;
     }
 
-    @Column(name = "basvuru_yapilan_pozisyon_aciklamasi", length = 250)
+    @Column(name = "bsvyp_poz_acikl", length = 250)
     public String getBasvuruYapilanPozisyonAciklamasi() {
         return basvuruYapilanPozisyonAciklamasi;
     }

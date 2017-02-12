@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * @author vektorel
  */
 @Entity
-@Table(name = "il")
+@Table(name = "gnl_il")
 @SequenceGenerator(allocationSize = 1, name = "default_id_generator", sequenceName = "seq_il")
 public class Il extends EBase {
 

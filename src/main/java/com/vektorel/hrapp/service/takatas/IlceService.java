@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vektorel.hrapp.entity.service.takatas;
+package com.vektorel.hrapp.service.takatas;
 
 import com.vektorel.hrapp.entity.takatas.Il;
+import com.vektorel.hrapp.entity.takatas.Ilce;
 import com.vektorel.hrapp.service.IBaseService;
 import com.vektorel.hrapp.util.HRException;
 import com.vektorel.hrapp.util.HibernateUtil;
@@ -20,10 +21,10 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author vektorel
  */
-public class IlService implements IBaseService<Il> {
+public class IlceService implements IBaseService<Ilce> {
 
     @Override
-    public boolean save(Il entity) throws Exception {
+    public boolean save(Ilce entity) throws Exception {
 
         if (entity.getAd() == null && entity.getAd().trim().equals("")) {
             throw new HRException("İlçe Adı Boş Olamaz!");
@@ -43,7 +44,7 @@ public class IlService implements IBaseService<Il> {
     }
 
     @Override
-    public boolean update(Il entity) throws Exception {
+    public boolean update(Ilce entity) throws Exception {
         if (entity.getAd() == null && entity.getAd().trim().equals("")) {
             throw new HRException("İlçe Adı Boş Olamaz!");
         }
@@ -61,7 +62,7 @@ public class IlService implements IBaseService<Il> {
     }
 
     @Override
-    public boolean delete(Il entity) throws Exception {
+    public boolean delete(Ilce entity) throws Exception {
         if (entity.getAd() == null && entity.getAd().trim().equals("")) {
             throw new HRException("İlçe Adı Boş Olamaz!");
         }
@@ -80,28 +81,20 @@ public class IlService implements IBaseService<Il> {
     }
 
     @Override
-    public List<Il> getAll(String query) {
+    public List<Ilce> getAll(String query) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Il.class);
+        Criteria criteria = session.createCriteria(Ilce.class);
         criteria.addOrder(Order.asc("id"));
         return criteria.list();
     }
 
     @Override
-    public Il getById(Long id) {
+    public Ilce getById(Long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Il.class);
+        Criteria criteria = session.createCriteria(Ilce.class);
         criteria.add(Restrictions.eq("id", id));
 
-        return (Il) criteria.uniqueResult();
-    }
-
-    public Il getByIlAdi(String ad) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Il.class);
-        criteria.add(Restrictions.eq("ad", ad));
-
-        return (Il) criteria.uniqueResult();
+        return (Ilce) criteria.uniqueResult();
     }
 
 }

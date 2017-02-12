@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -14,7 +15,7 @@ import javax.persistence.Table;
  * @author eaytac
  */
 @Entity
-@Table(name = "fotograf")
+@Table(name = "gnl_fotograf")
 public class Fotograf implements java.io.Serializable {
 
     private Integer id;
@@ -39,6 +40,7 @@ public class Fotograf implements java.io.Serializable {
         this.id = id;
     }
 
+    @Lob
     @Column(name = "IMAGE", nullable = false)
     public byte[] getImage() {
         return this.image;

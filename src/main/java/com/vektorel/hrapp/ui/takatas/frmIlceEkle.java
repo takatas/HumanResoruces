@@ -5,8 +5,8 @@
  */
 package com.vektorel.hrapp.ui.takatas;
 
-import com.vektorel.hrapp.entity.service.takatas.IlService;
-import com.vektorel.hrapp.entity.service.takatas.IlceService;
+import com.vektorel.hrapp.service.takatas.IlService;
+import com.vektorel.hrapp.service.takatas.IlceService;
 import com.vektorel.hrapp.entity.takatas.Il;
 import com.vektorel.hrapp.entity.takatas.Ilce;
 import java.util.List;

@@ -5,6 +5,8 @@
  */
 package com.vektorel.hrapp;
 
+import com.vektorel.hrapp.ui.taner.frmLogin;
+
 /**
  *
  * @author vektorel
@@ -12,5 +14,9 @@ package com.vektorel.hrapp;
 public class App {
     public static void main(String[] args) {
         
+        System.out.println("Application is start...");
+        frmLogin login=new frmLogin(null, true);
+        login.setLocationRelativeTo(null);
+        login.show();
     }
 }

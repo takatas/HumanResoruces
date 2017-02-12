@@ -84,7 +84,7 @@ public class KullaniciService implements  IBaseService<Kullanici>{
         Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Kullanici.class);
         criteria.add(Restrictions.eq("username", username));
-        criteria.add(Restrictions.eq("password", pass));
+        criteria.add(Restrictions.eq("pass", pass));
         return (Kullanici) criteria.uniqueResult();
     }
 }

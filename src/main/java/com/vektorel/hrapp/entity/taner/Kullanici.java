@@ -8,6 +8,8 @@ package com.vektorel.hrapp.entity.taner;
 import com.vektorel.hrapp.entity.EBase;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -23,16 +25,18 @@ public class Kullanici extends EBase{
     private String pass;
     private String email;
     private String adSoyad;
+    private KullaniciTip kullaniciTip;
 
     public Kullanici() {
     }
 
-    public Kullanici(Long id,String username, String pass, String email, String adSoyad) {
+    public Kullanici(Long id,String username, String pass, String email, String adSoyad,KullaniciTip kullaniciTip) {
         this.username = username;
         this.pass = pass;
         this.email = email;
         this.adSoyad = adSoyad;
         this.setId(id);
+        this.kullaniciTip=kullaniciTip;
     }
     
     
@@ -70,5 +74,16 @@ public class Kullanici extends EBase{
 
     public void setAdSoyad(String adSoyad) {
         this.adSoyad = adSoyad;
-    }    
+    }   
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "kullanici_tip")
+    public KullaniciTip getKullaniciTip() {
+        return kullaniciTip;
+    }
+
+    public void setKullaniciTip(KullaniciTip kullaniciTip) {
+        this.kullaniciTip = kullaniciTip;
+    }
+    
 }

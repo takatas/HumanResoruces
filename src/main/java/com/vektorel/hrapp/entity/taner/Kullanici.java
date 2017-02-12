@@ -24,6 +24,18 @@ public class Kullanici extends EBase{
     private String email;
     private String adSoyad;
 
+    public Kullanici() {
+    }
+
+    public Kullanici(Long id,String username, String pass, String email, String adSoyad) {
+        this.username = username;
+        this.pass = pass;
+        this.email = email;
+        this.adSoyad = adSoyad;
+        this.setId(id);
+    }
+    
+    
     @Column(name = "uname",length = 100,unique = true)
     public String getUsername() {
         return username;

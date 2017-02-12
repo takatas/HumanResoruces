@@ -5,6 +5,8 @@
  */
 package com.vektorel.hrapp.ui;
 
+import com.vektorel.hrapp.entity.taner.Kullanici;
+
 /**
  *
  * @author vektorel
@@ -14,7 +16,7 @@ public class frmAnasayfa extends javax.swing.JFrame {
     /**
      * Creates new form frmAnasayfa
      */
-    public frmAnasayfa() {
+    public frmAnasayfa(Kullanici kullanici) {
         initComponents();
     }
 

@@ -5,7 +5,6 @@
  */
 package com.vektorel.hrapp.ui.takatas;
 
-import com.vektorel.hrapp.entity.service.takatas.DosyaOkuService;
 import com.vektorel.hrapp.entity.service.takatas.IlService;
 import com.vektorel.hrapp.entity.service.takatas.IlceService;
 import com.vektorel.hrapp.entity.takatas.Il;
@@ -182,6 +181,7 @@ public class frmIlIlceTablo extends javax.swing.JFrame {
     private void tblIlIlceMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblIlIlceMouseReleased
         if (evt.isPopupTrigger()) {
             popMnuIlIce.show(this, evt.getX(), evt.getY());
+        }
     }//GEN-LAST:event_tblIlIlceMouseReleased
 
     private void btnIlceEkleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIlceEkleActionPerformed

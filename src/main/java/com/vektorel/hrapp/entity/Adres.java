@@ -5,8 +5,6 @@
  */
 package com.vektorel.hrapp.entity;
 
-import com.vektorel.hrapp.entity.takatas.Il;
-import com.vektorel.hrapp.entity.takatas.Ilce;
 import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;

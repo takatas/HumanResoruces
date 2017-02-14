@@ -5,8 +5,8 @@
  */
 package com.vektorel.hrapp.util;
 
-import com.vektorel.hrapp.entity.ayse.Kisi;
-import com.vektorel.hrapp.entity.taner.Kullanici;
+import com.vektorel.hrapp.entity.Kisi;
+import com.vektorel.hrapp.entity.Kullanici;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;

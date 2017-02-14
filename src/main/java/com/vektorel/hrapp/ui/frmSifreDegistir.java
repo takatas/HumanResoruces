@@ -5,18 +5,17 @@
  */
 package com.vektorel.hrapp.ui;
 
-import com.vektorel.hrapp.entity.Kullanici;
-
 /**
  *
  * @author vektorel
  */
-public class frmAnasayfa extends javax.swing.JFrame {
+public class frmSifreDegistir extends javax.swing.JDialog {
 
     /**
-     * Creates new form frmAnasayfa
+     * Creates new form frmSifreDegistir
      */
-    public frmAnasayfa(Kullanici kullanici) {
+    public frmSifreDegistir(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -29,7 +28,7 @@ public class frmAnasayfa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

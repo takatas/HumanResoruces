@@ -5,18 +5,16 @@
  */
 package com.vektorel.hrapp.ui;
 
-import com.vektorel.hrapp.entity.Kullanici;
-
 /**
  *
  * @author vektorel
  */
-public class frmAnasayfa extends javax.swing.JFrame {
+public class frmKullaniciIslemleri extends javax.swing.JFrame {
 
     /**
-     * Creates new form frmAnasayfa
+     * Creates new form frmKullaniciIslemleri
      */
-    public frmAnasayfa(Kullanici kullanici) {
+    public frmKullaniciIslemleri() {
         initComponents();
     }
 
@@ -35,11 +33,11 @@ public class frmAnasayfa extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 443, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 440, Short.MAX_VALUE)
         );
 
         pack();

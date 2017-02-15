@@ -9,6 +9,7 @@ import com.vektorel.hrapp.entity.Kullanici;
 import com.vektorel.hrapp.entity.KullaniciTip;
 import com.vektorel.hrapp.service.KullaniciService;
 import com.vektorel.hrapp.util.DefaultComboModel;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -18,6 +19,9 @@ import javax.swing.JOptionPane;
  */
 public class frmKullaniciEkle extends javax.swing.JDialog {
 
+    KullaniciService kullaniciService = new KullaniciService();
+    Kullanici kullanici;
+
     /**
      * Creates new form frmKullaniciEkle
      */
@@ -26,9 +30,10 @@ public class frmKullaniciEkle extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         comboInit();
+        kullaniciTabloyuDoldur();
     }
 
-    public frmKullaniciEkle(java.awt.Frame parent, boolean modal,Kullanici kullanici) {
+    public frmKullaniciEkle(java.awt.Frame parent, boolean modal, Kullanici kullanici) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -38,6 +43,7 @@ public class frmKullaniciEkle extends javax.swing.JDialog {
         txtUsername.setEditable(false);
         lblId.setText(kullanici.getId().toString());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,11 +66,15 @@ public class frmKullaniciEkle extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         cmbKulTip = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblKullaniciListesi = new javax.swing.JTable();
+        btnKullaniciGuncelle = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnKaydet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
         btnKaydet.setText("Kaydet");
+        btnKaydet.setToolTipText("Kaydet");
         btnKaydet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKaydetActionPerformed(evt);
@@ -91,78 +101,102 @@ public class frmKullaniciEkle extends javax.swing.JDialog {
 
         jLabel6.setText("Kullanıcı Tipi :");
 
+        tblKullaniciListesi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblKullaniciListesi);
+
+        btnKullaniciGuncelle.setText("Güncelle");
+        btnKullaniciGuncelle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKullaniciGuncelleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(78, 78, 78))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(btnKaydet)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnKullaniciGuncelle))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtNameSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbKulTip, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnIptal))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(109, 109, 109))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(btnIptal))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(cmbKulTip, 0, 134, Short.MAX_VALUE)
-                        .addComponent(txtNameSurname)
-                        .addComponent(txtPass)
-                        .addComponent(txtUsername))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(btnKaydet)))
-                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addGap(7, 7, 7)
+                .addComponent(jLabel4)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel2)
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(txtNameSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbKulTip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtNameSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(cmbKulTip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnKaydet)
+                    .addComponent(btnKaydet, javax.swing.GroupLayout.PREFERRED_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(btnKullaniciGuncelle)
                     .addComponent(btnIptal))
-                .addGap(28, 28, 28))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -170,29 +204,48 @@ public class frmKullaniciEkle extends javax.swing.JDialog {
 
     private void btnKaydetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKaydetActionPerformed
         try {
-            KullaniciService ks = new KullaniciService();
+            //KullaniciService ks = new KullaniciService();
             DefaultComboModel secilenModel = (DefaultComboModel) cmbKulTip.getSelectedItem();
-            KullaniciTip t=KullaniciTip.getEnum(secilenModel.getValue().intValue());
-            
-            if(lblId.getText().trim().equals("")){
-                ks.save(new Kullanici(null,txtUsername.getText(), txtPass.getText(),"", txtNameSurname.getText(),t));
-            }else{
-                ks.update(new Kullanici(new Long(lblId.getText()),txtUsername.getText(),"", txtPass.getText(), txtNameSurname.getText(),t));
+            KullaniciTip t = KullaniciTip.getEnum(secilenModel.getValue().intValue());
+
+            if (lblId.getText().trim().equals("")) {
+                kullaniciService.save(new Kullanici(null, txtUsername.getText(), txtPass.getText(), "", txtNameSurname.getText(), t));
+            } else {
+                kullaniciService.update(new Kullanici(new Long(lblId.getText()), txtUsername.getText(), "", txtPass.getText(), txtNameSurname.getText(), t));
             }
-            this.dispose();
+            //this.dispose();
+            kullaniciTabloyuDoldur();
+            alanBosalt();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_btnKaydetActionPerformed
 
     private void btnIptalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIptalActionPerformed
-     this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnIptalActionPerformed
+
+    private void btnKullaniciGuncelleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKullaniciGuncelleActionPerformed
+        int seciliKayit = tblKullaniciListesi.getSelectedRow();
+        if (seciliKayit > -1) {
+            String value = tblKullaniciListesi.getValueAt(seciliKayit, 0).toString();
+            Kullanici kullanici = kullaniciService.getById(new Long(value));
+            
+            lblId.setText(kullanici.getId().toString());
+            txtUsername.setText(kullanici.getUsername());
+            txtPass.setText(kullanici.getPass());
+            txtNameSurname.setText(kullanici.getAdSoyad());
+            //DefaultComboModel secilenModel = (DefaultComboModel) cmbKulTip.getSelectedItem();
+            //cmbKulTip.set(cmbKulTip.getSelectedItem());
+
+        }
+    }//GEN-LAST:event_btnKullaniciGuncelleActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIptal;
     private javax.swing.JButton btnKaydet;
+    private javax.swing.JButton btnKullaniciGuncelle;
     private javax.swing.JComboBox<String> cmbKulTip;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -200,18 +253,46 @@ public class frmKullaniciEkle extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblId;
+    private javax.swing.JTable tblKullaniciListesi;
     private javax.swing.JTextField txtNameSurname;
     private javax.swing.JTextField txtPass;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    private void comboInit() { 
+    private void comboInit() {
         DefaultComboModel[] dizi = new DefaultComboModel[3];
         for (int i = 0; i < KullaniciTip.values().length; i++) {
             String label = KullaniciTip.values()[i].getLabel();
             dizi[i] = new DefaultComboModel(new Long(i), label);
         }
         cmbKulTip.setModel(new DefaultComboBoxModel(dizi));
+    }
+
+    private void kullaniciTabloyuDoldur() {
+        List<Kullanici> kullanici = kullaniciService.getAll(null);
+        String[][] data = new String[kullanici.size()][6];
+        for (int i = 0; i < kullanici.size(); i++) {
+            data[i][0] = kullanici.get(i).getId().toString();
+            data[i][1] = kullanici.get(i).getAdSoyad();
+            data[i][2] = kullanici.get(i).getUsername();
+            data[i][3] = kullanici.get(i).getKullaniciTip().getLabel();
+
+        }
+
+        tblKullaniciListesi.setModel(new javax.swing.table.DefaultTableModel(
+                data,
+                new String[]{
+                    "Id", "Ad Soyad", "Kullanıcı Adı", "Kullanıcı Rolü"
+                }
+        ));
+    }
+    
+    private void alanBosalt(){
+        
+        txtNameSurname.setText("");
+        txtPass.setText("");
+        txtUsername.setText("");
     }
 }

@@ -1,7 +1,11 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.vektorel.hrapp.service;
 
-import com.vektorel.hrapp.entity.Cv;
-import com.vektorel.hrapp.service.IBaseService;
+import com.vektorel.hrapp.entity.Kisi;
 import com.vektorel.hrapp.util.HRException;
 import com.vektorel.hrapp.util.HibernateUtil;
 import java.util.List;
@@ -13,18 +17,23 @@ import org.hibernate.criterion.Restrictions;
 
 /**
  *
- * @author eaytac
+ * @author takatas
  */
-public class CvService implements IBaseService<Cv> {
+public class KisiService implements IBaseService<Kisi> {
 
     @Override
-    public boolean save(Cv entity) throws Exception {
+    public boolean save(Kisi entity) throws Exception {
+
         if (entity.getAd() == null || entity.getAd().trim().equals("")) {
-            throw new HRException("Ad alanı boş olmamalıdır");
+            throw new HRException("Adı Boş Olmamalıdır");
         }
         if (entity.getSoyad() == null || entity.getSoyad().trim().equals("")) {
-            throw new HRException("Soyad alanı boş olmamalıdır");
+            throw new HRException("Soyadı Boş Olmamalıdır");
         }
+        if (entity.getTc() == null || entity.getTc().toString().equals("")) {
+            throw new HRException("TC No Boş Olmamalıdır");
+        }
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction trans = session.beginTransaction();
         session.save(entity);
@@ -34,14 +43,17 @@ public class CvService implements IBaseService<Cv> {
     }
 
     @Override
-    public boolean update(Cv entity) throws Exception{
-
+    public boolean update(Kisi entity) throws Exception {
         if (entity.getAd() == null || entity.getAd().trim().equals("")) {
-            throw new HRException("Ad alanı boş olmamalıdır");
+            throw new HRException("Adı Boş Olmamalıdır");
         }
         if (entity.getSoyad() == null || entity.getSoyad().trim().equals("")) {
-            throw new HRException("Soyad alanı boş olmamalıdır");
+            throw new HRException("Soyadı Boş Olmamalıdır");
         }
+        if (entity.getTc() == null || entity.getTc().toString().equals("")) {
+            throw new HRException("TC No Boş Olmamalıdır");
+        }
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction trans = session.beginTransaction();
         session.update(entity);
@@ -51,7 +63,8 @@ public class CvService implements IBaseService<Cv> {
     }
 
     @Override
-    public boolean delete(Cv entity) {
+    public boolean delete(Kisi entity) throws Exception {
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction trans = session.beginTransaction();
         session.delete(entity);
@@ -61,27 +74,20 @@ public class CvService implements IBaseService<Cv> {
     }
 
     @Override
-    public List<Cv> getAll(String query) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Cv.class);
-//        if(query!=null){
-//            criteria.add(Restrictions.or(Restrictions.ilike("username", query,MatchMode.ANYWHERE),
-//                    Restrictions.ilike("adSoyad", query,MatchMode.ANYWHERE)));
-//        }
+    public List<Kisi> getAll(String query) {
+        
+        Session  session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Kisi.class);
         criteria.addOrder(Order.asc("id"));
-        List l = criteria.list();
-        session.close();
-        return l;
+        return criteria.list();
     }
 
     @Override
-    public Cv getById(Long id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Cv.class);
+    public Kisi getById(Long id) {
+        Session  session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Kisi.class);
         criteria.add(Restrictions.eq("id", id));
-        Cv cv = (Cv) criteria.uniqueResult();
-        session.close();
-        return cv;
+        return (Kisi) criteria.uniqueResult();
     }
 
 }

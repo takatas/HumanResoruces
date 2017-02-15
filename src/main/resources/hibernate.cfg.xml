@@ -51,18 +51,18 @@ Contributor(s):
     
     <mapping class="com.vektorel.hrapp.entity.Adres"></mapping>
     <mapping class="com.vektorel.hrapp.entity.EBase"></mapping>
-    <mapping class="com.vektorel.hrapp.entity.ayse.Cinsiyet"></mapping>
-    <mapping class="com.vektorel.hrapp.entity.ayse.Kisi"></mapping>
-    <mapping class="com.vektorel.hrapp.entity.deniz.Bolum"></mapping>
-    <mapping class="com.vektorel.hrapp.entity.deniz.Okul"></mapping>
-    <mapping class="com.vektorel.hrapp.entity.elif.Departman"></mapping>
-    <mapping class="com.vektorel.hrapp.entity.elif.Gorev"></mapping>
-    <mapping class="com.vektorel.hrapp.entity.emre.Cv"></mapping>
-    <mapping class="com.vektorel.hrapp.entity.emre.Fotograf"></mapping>
-    <mapping class="com.vektorel.hrapp.entity.emre.IsBasvuru"></mapping>
-    <mapping class="com.vektorel.hrapp.entity.takatas.Il"></mapping>
-    <mapping class="com.vektorel.hrapp.entity.takatas.Ilce"></mapping>
-    <mapping class="com.vektorel.hrapp.entity.taner.Kullanici"></mapping>
-    <mapping class="com.vektorel.hrapp.entity.tugce.Personel"></mapping>
+    <mapping class="com.vektorel.hrapp.entity.Cinsiyet"></mapping>
+    <mapping class="com.vektorel.hrapp.entity.Kisi"></mapping>
+    <mapping class="com.vektorel.hrapp.entity.Bolum"></mapping>
+    <mapping class="com.vektorel.hrapp.entity.Okul"></mapping>
+    <mapping class="com.vektorel.hrapp.entity.Departman"></mapping>
+    <mapping class="com.vektorel.hrapp.entity.Gorev"></mapping>
+    <mapping class="com.vektorel.hrapp.entity.Cv"></mapping>
+    <mapping class="com.vektorel.hrapp.entity.Fotograf"></mapping>
+    <mapping class="com.vektorel.hrapp.entity.IsBasvuru"></mapping>
+    <mapping class="com.vektorel.hrapp.entity.Il"></mapping>
+    <mapping class="com.vektorel.hrapp.entity.Ilce"></mapping>
+    <mapping class="com.vektorel.hrapp.entity.Kullanici"></mapping>
+    <mapping class="com.vektorel.hrapp.entity.Personel"></mapping>
   </session-factory>
 </hibernate-configuration>

@@ -68,6 +68,12 @@ public class frmLogin extends javax.swing.JDialog {
             }
         });
 
+        txtSifre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSifreKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,8 +119,13 @@ public class frmLogin extends javax.swing.JDialog {
         Kullanici kullanici = ks.getUsernameAndPassword(txtKullaniciAdi.getText(), txtSifre.getText());
         if (kullanici != null && kullanici.getId() != null) {
             this.dispose();
-            frmAnasayfa a = new frmAnasayfa(kullanici);
-            a.show();
+            frmKullaniciEkle ekle = new frmKullaniciEkle(null, true);
+            ekle.show();
+            
+//            frmAnasayfa a = new frmAnasayfa(kullanici);
+//            a.show();
+//            a.setLocationRelativeTo(null);
+
         } else {
             JOptionPane.showMessageDialog(rootPane, "Kullanıcı Adı veya Şifre Hatalı");
         }
@@ -128,11 +139,23 @@ public class frmLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_btnIptalActionPerformed
 
     private void txtKullaniciAdiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKullaniciAdiKeyPressed
-          if (evt.getKeyCode()==KeyEvent.VK_F9){
-            frmKullaniciEkle ekle=new frmKullaniciEkle(null, true);
+        if (evt.getKeyCode() == KeyEvent.VK_F9) {
+            frmKullaniciEkle ekle = new frmKullaniciEkle(null, true);
             ekle.show();
         }
     }//GEN-LAST:event_txtKullaniciAdiKeyPressed
+
+    private void txtSifreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSifreKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { // şifre alanında enter a basılırsa login olması sağlandı.
+            KullaniciService ks = new KullaniciService();
+            Kullanici kullanici = ks.getUsernameAndPassword(txtKullaniciAdi.getText(), txtSifre.getText());
+            frmAnasayfa anasayfa = new frmAnasayfa(kullanici);
+            this.dispose();
+            anasayfa.show();
+            anasayfa.setLocationRelativeTo(null);
+
+        }
+    }//GEN-LAST:event_txtSifreKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,7 +5,7 @@
  */
 package com.vektorel.hrapp;
 
-import com.vektorel.hrapp.ui.taner.frmLogin;
+import com.vektorel.hrapp.ui.frmLogin;
 
 /**
  *

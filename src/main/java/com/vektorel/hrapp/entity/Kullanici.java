@@ -29,8 +29,8 @@ public class Kullanici extends EBase{
 
     public Kullanici() {
     }
-
-    public Kullanici(Long id,String username, String pass, String email, String adSoyad,KullaniciTip kullaniciTip) {
+                
+    public Kullanici(Long id,String username, String pass, String adSoyad, String email, KullaniciTip kullaniciTip) {
         this.username = username;
         this.pass = pass;
         this.email = email;

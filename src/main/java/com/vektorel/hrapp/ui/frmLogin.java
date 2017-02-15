@@ -118,9 +118,14 @@ public class frmLogin extends javax.swing.JDialog {
         KullaniciService ks = new KullaniciService();
         Kullanici kullanici = ks.getUsernameAndPassword(txtKullaniciAdi.getText(), txtSifre.getText());
         if (kullanici != null && kullanici.getId() != null) {
+            
+            
+            frmKisiEkle kisiEkle = new frmKisiEkle(null, true);
             this.dispose();
-            frmKullaniciEkle ekle = new frmKullaniciEkle(null, true);
-            ekle.show();
+            kisiEkle.show();
+            kisiEkle.setLocationRelativeTo(null);
+//            frmKullaniciEkle ekle = new frmKullaniciEkle(null, true);
+//            ekle.show();
             
 //            frmAnasayfa a = new frmAnasayfa(kullanici);
 //            a.show();

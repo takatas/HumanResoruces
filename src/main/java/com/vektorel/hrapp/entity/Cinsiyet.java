@@ -10,5 +10,31 @@ package com.vektorel.hrapp.entity;
  * @author vektorel
  */
 public enum Cinsiyet {
-    ERKEK, KADIN, BILINMIYOR
+    
+    ERKEK("Erkek"),
+    KADIN("Kadın"),
+    DIGER("Diğer");
+    
+    String label;
+
+    private Cinsiyet(String label) {
+        this.label = label;
+    }
+    
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+ 
+    public static Cinsiyet getEnum(int i){
+        switch(i){
+            case 0 : return ERKEK;
+            case 1 : return KADIN;
+            case 2 : return DIGER;
+        }
+        return DIGER;
+    }
 }

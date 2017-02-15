@@ -63,11 +63,11 @@ public class KullaniciService implements  IBaseService<Kullanici>{
     public List<Kullanici> getAll(String query) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Kullanici.class);
-        if(query!=null){
-//            select * from kullanici where ad_soyad like '%KARA%' or username like '%KARA%'
-            criteria.add(Restrictions.or(Restrictions.ilike("username", query,MatchMode.ANYWHERE),
-                    Restrictions.ilike("adSoyad", query,MatchMode.ANYWHERE)));
-        }
+//        if(query!=null){
+////            select * from kullanici where ad_soyad like '%KARA%' or username like '%KARA%'
+//            criteria.add(Restrictions.or(Restrictions.ilike("username", query,MatchMode.ANYWHERE),
+//                    Restrictions.ilike("adSoyad", query,MatchMode.ANYWHERE)));
+//        }
         criteria.addOrder(Order.asc("id"));
         return criteria.list();
     }

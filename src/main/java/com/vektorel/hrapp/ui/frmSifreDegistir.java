@@ -5,6 +5,12 @@
  */
 package com.vektorel.hrapp.ui;
 
+import com.vektorel.hrapp.entity.Kullanici;
+import com.vektorel.hrapp.entity.KullaniciTip;
+import com.vektorel.hrapp.service.KullaniciService;
+import com.vektorel.hrapp.util.DefaultComboModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author vektorel
@@ -14,9 +20,15 @@ public class frmSifreDegistir extends javax.swing.JDialog {
     /**
      * Creates new form frmSifreDegistir
      */
-    public frmSifreDegistir(java.awt.Frame parent, boolean modal) {
+    String userName, nameSurname;
+
+    public frmSifreDegistir(java.awt.Frame parent, boolean modal, Kullanici kullanici) {
         super(parent, modal);
         initComponents();
+        lblKullaniciBilgisi.setText(kullanici.getId().toString());
+
+        userName = kullanici.getUsername();
+        nameSurname = kullanici.getAdSoyad();
     }
 
     /**
@@ -28,27 +40,141 @@ public class frmSifreDegistir extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblKullaniciBilgisi = new javax.swing.JLabel();
+        lblEskiSifre = new javax.swing.JLabel();
+        lblYeniSifre = new javax.swing.JLabel();
+        txtEskiSifre = new javax.swing.JPasswordField();
+        txtYeniSifre = new javax.swing.JPasswordField();
+        lblYeniSifreTekrar = new javax.swing.JLabel();
+        txtYeniSifreTekrar = new javax.swing.JPasswordField();
+        btnIptal = new javax.swing.JButton();
+        btnKaydet = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        lblEskiSifre.setText("Eski Şifre ");
+
+        lblYeniSifre.setText("Yeni Şifre");
+
+        lblYeniSifreTekrar.setText("Yeni Şifre Tekrar");
+
+        btnIptal.setText("İptal");
+        btnIptal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIptalActionPerformed(evt);
+            }
+        });
+
+        btnKaydet.setText("Kaydet");
+        btnKaydet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKaydetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(lblYeniSifre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtYeniSifre))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblYeniSifreTekrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnIptal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                                .addComponent(btnKaydet))
+                            .addComponent(txtYeniSifreTekrar)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(25, 25, 25)
+                            .addComponent(lblEskiSifre)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtEskiSifre, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblKullaniciBilgisi, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(lblKullaniciBilgisi, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEskiSifre)
+                    .addComponent(txtEskiSifre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblYeniSifre)
+                    .addComponent(txtYeniSifre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblYeniSifreTekrar)
+                    .addComponent(txtYeniSifreTekrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnIptal)
+                    .addComponent(btnKaydet))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnKaydetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKaydetActionPerformed
+
+        if (txtEskiSifre.getText() != null || txtEskiSifre.getText().length() > 0) {
+            if (txtYeniSifre.getText() != null || txtYeniSifre.getText().length() > 0) {
+                if ((txtYeniSifreTekrar.getText() != null || txtYeniSifreTekrar.getText().length() > 0)) {
+                    KullaniciService kullaniciService = new KullaniciService();
+                    Kullanici kullanici = kullaniciService.getById(new Long(lblKullaniciBilgisi.getText()));
+                    if (txtEskiSifre.getText().equals(kullanici.getPass().toString())) {
+                        boolean ok = kullaniciService.update(new Kullanici(new Long(lblKullaniciBilgisi.getText()), userName, txtYeniSifre.getText(), nameSurname));
+                        if (ok) {
+                            JOptionPane.showMessageDialog(rootPane, "Şifre Değiştirildi.");
+                            this.dispose();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Eski Şifrenizi Yanlış Girdiniz!");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Yeni Şifrenizi Tekrar Girmelisiniz!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Yeni Şifrenizi Girmelisiniz!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Eski Şifrenizi Girmelisiniz!");
+        }
+
+
+    }//GEN-LAST:event_btnKaydetActionPerformed
+
+    private void btnIptalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIptalActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnIptalActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIptal;
+    private javax.swing.JButton btnKaydet;
+    private javax.swing.JLabel lblEskiSifre;
+    private javax.swing.JLabel lblKullaniciBilgisi;
+    private javax.swing.JLabel lblYeniSifre;
+    private javax.swing.JLabel lblYeniSifreTekrar;
+    private javax.swing.JPasswordField txtEskiSifre;
+    private javax.swing.JPasswordField txtYeniSifre;
+    private javax.swing.JPasswordField txtYeniSifreTekrar;
     // End of variables declaration//GEN-END:variables
 }

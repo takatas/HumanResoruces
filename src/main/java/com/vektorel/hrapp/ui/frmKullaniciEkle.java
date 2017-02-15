@@ -69,6 +69,8 @@ public class frmKullaniciEkle extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblKullaniciListesi = new javax.swing.JTable();
         btnKullaniciGuncelle = new javax.swing.JButton();
+        btnKullaniciSil = new javax.swing.JButton();
+        btnSifreDegistir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -121,6 +123,20 @@ public class frmKullaniciEkle extends javax.swing.JDialog {
             }
         });
 
+        btnKullaniciSil.setText("Sil");
+        btnKullaniciSil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKullaniciSilActionPerformed(evt);
+            }
+        });
+
+        btnSifreDegistir.setText("Şifre Değiştir");
+        btnSifreDegistir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSifreDegistirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,22 +152,29 @@ public class frmKullaniciEkle extends javax.swing.JDialog {
                         .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(78, 78, 78))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(btnKaydet)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnKullaniciGuncelle))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNameSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
+                                .addComponent(txtNameSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnKaydet)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnKullaniciGuncelle)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnKullaniciSil, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbKulTip, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnIptal))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cmbKulTip, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnIptal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSifreDegistir)))
+                        .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,7 +217,9 @@ public class frmKullaniciEkle extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnKaydet, javax.swing.GroupLayout.PREFERRED_SIZE, 32, Short.MAX_VALUE)
                     .addComponent(btnKullaniciGuncelle)
-                    .addComponent(btnIptal))
+                    .addComponent(btnIptal)
+                    .addComponent(btnKullaniciSil)
+                    .addComponent(btnSifreDegistir))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -230,7 +255,7 @@ public class frmKullaniciEkle extends javax.swing.JDialog {
         if (seciliKayit > -1) {
             String value = tblKullaniciListesi.getValueAt(seciliKayit, 0).toString();
             Kullanici kullanici = kullaniciService.getById(new Long(value));
-            
+
             lblId.setText(kullanici.getId().toString());
             txtUsername.setText(kullanici.getUsername());
             txtPass.setText(kullanici.getPass());
@@ -241,11 +266,40 @@ public class frmKullaniciEkle extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnKullaniciGuncelleActionPerformed
 
+    private void btnKullaniciSilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKullaniciSilActionPerformed
+        int seciliKayit = tblKullaniciListesi.getSelectedRow();
+        if (seciliKayit > -1) {
+            String value = tblKullaniciListesi.getValueAt(seciliKayit, 0).toString();
+            Kullanici kullanici = kullaniciService.getById(new Long(value));
+            int a = JOptionPane.showConfirmDialog(rootPane, "Seçili Kaydı Silmek istiyor musunuz?", "Sil", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (a == 0) {
+                kullaniciService.delete(kullanici);
+                kullaniciTabloyuDoldur();
+            }
+
+        }
+
+    }//GEN-LAST:event_btnKullaniciSilActionPerformed
+
+    private void btnSifreDegistirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSifreDegistirActionPerformed
+        int seciliKayit = tblKullaniciListesi.getSelectedRow();
+        if (seciliKayit > -1) {
+            String value = tblKullaniciListesi.getValueAt(seciliKayit, 0).toString();
+            Kullanici kullanici = kullaniciService.getById(new Long(value));
+            frmSifreDegistir sifreDegistir = new frmSifreDegistir(null, true, kullanici);
+            sifreDegistir.show();
+            sifreDegistir.setLocationRelativeTo(null);
+
+        }
+    }//GEN-LAST:event_btnSifreDegistirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIptal;
     private javax.swing.JButton btnKaydet;
     private javax.swing.JButton btnKullaniciGuncelle;
+    private javax.swing.JButton btnKullaniciSil;
+    private javax.swing.JButton btnSifreDegistir;
     private javax.swing.JComboBox<String> cmbKulTip;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -277,7 +331,9 @@ public class frmKullaniciEkle extends javax.swing.JDialog {
             data[i][0] = kullanici.get(i).getId().toString();
             data[i][1] = kullanici.get(i).getAdSoyad();
             data[i][2] = kullanici.get(i).getUsername();
-            data[i][3] = kullanici.get(i).getKullaniciTip().getLabel();
+            if (kullanici.get(i).getKullaniciTip() != null) {
+                data[i][3] = kullanici.get(i).getKullaniciTip().getLabel();
+            }
 
         }
 
@@ -288,9 +344,9 @@ public class frmKullaniciEkle extends javax.swing.JDialog {
                 }
         ));
     }
-    
-    private void alanBosalt(){
-        
+
+    private void alanBosalt() {
+
         txtNameSurname.setText("");
         txtPass.setText("");
         txtUsername.setText("");

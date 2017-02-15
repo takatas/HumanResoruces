@@ -23,13 +23,110 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="lblYeniSifre" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="txtYeniSifre" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="lblYeniSifreTekrar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="btnIptal" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="94" max="32767" attributes="0"/>
+                              <Component id="btnKaydet" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="txtYeniSifreTekrar" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="lblEskiSifre" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="txtEskiSifre" min="-2" pref="216" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="lblKullaniciBilgisi" min="-2" pref="297" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="75" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <Component id="lblKullaniciBilgisi" min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblEskiSifre" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtEskiSifre" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblYeniSifre" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtYeniSifre" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblYeniSifreTekrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtYeniSifreTekrar" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnIptal" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnKaydet" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="92" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lblKullaniciBilgisi">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEskiSifre">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Eski &#x15e;ifre "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblYeniSifre">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Yeni &#x15e;ifre"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="txtEskiSifre">
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="txtYeniSifre">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblYeniSifreTekrar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Yeni &#x15e;ifre Tekrar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="txtYeniSifreTekrar">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnIptal">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x130;ptal"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIptalActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnKaydet">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Kaydet"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKaydetActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
 </Form>

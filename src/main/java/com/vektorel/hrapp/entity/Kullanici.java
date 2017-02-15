@@ -38,6 +38,14 @@ public class Kullanici extends EBase{
         this.setId(id);
         this.kullaniciTip=kullaniciTip;
     }
+
+    public Kullanici(Long id, String userName, String pass,  String adSoyad) {
+        
+        this.setId(id);
+        this.username = username;
+        this.pass = pass;
+        this.adSoyad = adSoyad;
+    }
     
     
     @Column(name = "uname",length = 100,unique = true)

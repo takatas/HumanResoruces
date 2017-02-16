@@ -75,7 +75,7 @@ public class KisiService implements IBaseService<Kisi> {
 
     @Override
     public List<Kisi> getAll(String query) {
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Kisi.class);
         criteria.addOrder(Order.asc("id"));
@@ -84,9 +84,16 @@ public class KisiService implements IBaseService<Kisi> {
 
     @Override
     public Kisi getById(Long id) {
-        Session  session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Kisi.class);
         criteria.add(Restrictions.eq("id", id));
+        return (Kisi) criteria.uniqueResult();
+    }
+
+    public Kisi getByName(String ad) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Kisi.class);
+        criteria.add(Restrictions.eq("adSoyad", ad));
         return (Kisi) criteria.uniqueResult();
     }
 

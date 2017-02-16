@@ -6,6 +6,7 @@
 package com.vektorel.hrapp.ui;
 
 import com.vektorel.hrapp.entity.Kullanici;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,7 +18,17 @@ public class frmAnasayfa extends javax.swing.JFrame {
      * Creates new form frmAnasayfa
      */
     public frmAnasayfa(Kullanici kullanici) {
-        initComponents();
+        try {
+            initComponents();
+            setExtendedState(this.MAXIMIZED_BOTH);
+
+            //setUndecorated(true);
+            setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        }
+
     }
 
     /**
@@ -29,27 +40,111 @@ public class frmAnasayfa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        treeMenu = new javax.swing.JTree();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("İnsan Kaynakları");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Tanımlar");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Kullanıcı Ekle/Güncelle");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("İl - İlçe Ekle/Güncelle");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Kişi Ekle/Güncelle");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Bölüm Ekle/Güncelle");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Departman Ekle/Güncelle");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Başvuru İşlemleri");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("CV");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("CV Listesi");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("İş Başvurusu");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeMenu.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        treeMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                treeMenuMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(treeMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 440, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    private void treeMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_treeMenuMouseClicked
 
+        String menu = treeMenu.getLastSelectedPathComponent().toString();
+
+        if (menu.equals("Kullanıcı Ekle/Güncelle")) {
+            frmKullaniciEkle kullaniciEkle = new frmKullaniciEkle(null, true);
+            kullaniciEkle.show();
+            kullaniciEkle.setLocationRelativeTo(null);
+        }
+
+        if (menu.equals("İl - İlçe Ekle/Güncelle")) {
+            try {
+                frmIlIlceTablo ilIlceTablo = new frmIlIlceTablo(null, true);
+                ilIlceTablo.show();
+                ilIlceTablo.setLocationRelativeTo(null);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            }
+
+        }
+        if (menu.equals("Kişi Ekle/Güncelle")) {
+            frmKisiEkle kisiEkle = new frmKisiEkle(null, true);
+            kisiEkle.show();
+            kisiEkle.setLocationRelativeTo(null);
+        }
+        if (menu.equals("Bölüm Ekle/Güncelle")) {
+            frmBolumEkle bolumEkle = new frmBolumEkle(null, true);
+            bolumEkle.show();
+            bolumEkle.setLocationRelativeTo(null);
+        }
+        if (menu.equals("Departman Ekle/Güncelle")) {
+            frmDepartmanEkle departmanEkle = new frmDepartmanEkle(null, true);
+            departmanEkle.show();
+            departmanEkle.setLocationRelativeTo(null);
+        }
+        if (menu.equals("Cv")) {
+            frmCv cv = new frmCv();
+            cv.show();
+            cv.setLocationRelativeTo(null);
+        }
+        if (menu.equals("CV Listesi")) {
+            frmCvListesi cvListesi = new frmCvListesi();
+            cvListesi.show();
+            cvListesi.setLocationRelativeTo(null);
+        }
+        if (menu.equals("İş Başvurusu")) {
+            frmIsBasvuru isBasvuru = new frmIsBasvuru();
+            isBasvuru.show();
+            isBasvuru.setLocationRelativeTo(null);
+        }
+
+    }//GEN-LAST:event_treeMenuMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTree treeMenu;
     // End of variables declaration//GEN-END:variables
 }

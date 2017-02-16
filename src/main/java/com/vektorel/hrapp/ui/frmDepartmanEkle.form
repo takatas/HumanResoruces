@@ -52,7 +52,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtTanim" max="32767" attributes="0"/>
-                                  <Component id="jComboBox1" max="32767" attributes="0"/>
+                                  <Component id="cmbYonetici" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -122,7 +122,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbYonetici" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblYonetici" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblAdres" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -184,7 +184,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="cmbYonetici">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
@@ -219,6 +219,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Sil"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSilActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnKapat">
       <Properties>

@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author vektorel
  */
-public class frmIlIlceTablo extends javax.swing.JFrame {
+public class frmIlIlceTablo extends javax.swing.JDialog {
 
     /**
      * Creates new form frmIlEkle
@@ -28,8 +28,10 @@ public class frmIlIlceTablo extends javax.swing.JFrame {
     IlService ilService = new IlService();
     IlceService ilceService = new IlceService();
 
-    public frmIlIlceTablo() {
+    public frmIlIlceTablo(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -154,7 +156,7 @@ public class frmIlIlceTablo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIlEkleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIlEkleActionPerformed
-        frmIlEkle ilEkle = new frmIlEkle(this, true);
+        frmIlEkle ilEkle = new frmIlEkle(null, true);
         ilEkle.show();
         setLocationRelativeTo(null);
         IlTabloyuDoldur();
@@ -185,7 +187,7 @@ public class frmIlIlceTablo extends javax.swing.JFrame {
     }//GEN-LAST:event_tblIlIlceMouseReleased
 
     private void btnIlceEkleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIlceEkleActionPerformed
-        frmIlceEkle ilceEkle = new frmIlceEkle(this, true);
+        frmIlceEkle ilceEkle = new frmIlceEkle(null, true);
         ilceEkle.show();
         setLocationRelativeTo(null);
         IlceTabloyuDoldur();
@@ -262,7 +264,7 @@ public class frmIlIlceTablo extends javax.swing.JFrame {
         if (seciliKayit > -1) {
             String value = tblIlIlce.getValueAt(seciliKayit, 0).toString();
             Il il = ilService.getById(new Long(value));
-            frmIlEkle guncelle = new frmIlEkle(this, true, il);
+            frmIlEkle guncelle = new frmIlEkle(null, true, il);
             guncelle.show();
             IlTabloyuDoldur();
         }
@@ -295,7 +297,7 @@ public class frmIlIlceTablo extends javax.swing.JFrame {
         if (seciliKayit > -1) {
             String value = tblIlIlce.getValueAt(seciliKayit, 0).toString();
             Ilce ilce = ilceService.getById(new Long(value));
-            frmIlceEkle guncelle = new frmIlceEkle(this, true, ilce);
+            frmIlceEkle guncelle = new frmIlceEkle(null, true, ilce);
             guncelle.show();
             IlceTabloyuDoldur();
         }

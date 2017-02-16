@@ -13,8 +13,10 @@ import com.vektorel.hrapp.entity.Kisi;
 import com.vektorel.hrapp.service.DepartmanService;
 import com.vektorel.hrapp.service.IlService;
 import com.vektorel.hrapp.service.IlceService;
+import com.vektorel.hrapp.service.KisiService;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,6 +25,9 @@ import java.util.List;
 public class frmDepartmanEkle extends javax.swing.JDialog {
 
     DepartmanService departmanService = new DepartmanService();
+    IlService ilService = new IlService();
+    IlceService ilceService = new IlceService();
+    KisiService kisiService = new KisiService();
 
     /**
      * Creates new form frmDepartmanEkle
@@ -32,6 +37,7 @@ public class frmDepartmanEkle extends javax.swing.JDialog {
         initComponents();
         IlIlceComboDoldur();
         departmanTabloyuDoldur();
+        //yoneticiDoldur();
     }
 
     /**
@@ -51,7 +57,7 @@ public class frmDepartmanEkle extends javax.swing.JDialog {
         lblAdres = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAdres = new javax.swing.JTextArea();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbYonetici = new javax.swing.JComboBox<>();
         lblYonetici = new javax.swing.JLabel();
         btnKaydet = new javax.swing.JButton();
         btnGuncelle = new javax.swing.JButton();
@@ -97,6 +103,11 @@ public class frmDepartmanEkle extends javax.swing.JDialog {
         });
 
         btnSil.setText("Sil");
+        btnSil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSilActionPerformed(evt);
+            }
+        });
 
         btnKapat.setText("Kapat");
         btnKapat.addActionListener(new java.awt.event.ActionListener() {
@@ -167,7 +178,7 @@ public class frmDepartmanEkle extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtTanim)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(cmbYonetici, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
@@ -220,7 +231,7 @@ public class frmDepartmanEkle extends javax.swing.JDialog {
                             .addComponent(cmbIlce, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbYonetici, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblYonetici)
                             .addComponent(lblAdres))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE))
@@ -248,10 +259,10 @@ public class frmDepartmanEkle extends javax.swing.JDialog {
     private void btnKaydetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKaydetActionPerformed
         try {
             Adres adres = new Adres();
-            IlService ilService = new IlService();
+
             Il il = ilService.getByIlAdi(cmbIl.getSelectedItem().toString());
-            IlceService ilceService = new IlceService();
             Ilce ilce = ilceService.getByIlceAdi(cmbIlce.getSelectedItem().toString());
+            //Kisi kisi = kisiService.getByName(cmbYonetici.getSelectedItem().toString());
 
             adres.setAcikAdres(txtAdres.getText());
             adres.setTel(txtTelefon.getText());
@@ -267,6 +278,7 @@ public class frmDepartmanEkle extends javax.swing.JDialog {
             departmanTabloyuDoldur();
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
     }//GEN-LAST:event_btnKaydetActionPerformed
 
@@ -283,9 +295,31 @@ public class frmDepartmanEkle extends javax.swing.JDialog {
         int seciliKayit = tblDepartman.getSelectedRow();
         if (seciliKayit > -1) {
             String value = tblDepartman.getValueAt(seciliKayit, 0).toString();
-            
+            Departman departman = departmanService.getById(new Long(value));
+
+            txtKod.setText(departman.getKod());
+            txtTanim.setText(departman.getTanim());
+            txtAdres.setText(departman.getAdres().getAcikAdres());
+            txtTelefon.setText(departman.getAdres().getTel());
+            txtEmail.setText(departman.getAdres().getEposta());
         }
     }//GEN-LAST:event_btnGuncelleActionPerformed
+
+    private void btnSilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSilActionPerformed
+        try {
+            int seciliKayit = tblDepartman.getSelectedRow();
+            if (seciliKayit > -1) {
+                String value = tblDepartman.getValueAt(seciliKayit, 0).toString();
+                Departman departman = departmanService.getById(new Long(value));
+                departmanService.delete(departman);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Listeden Kayıt Seçiniz.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        }
+    }//GEN-LAST:event_btnSilActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -295,7 +329,7 @@ public class frmDepartmanEkle extends javax.swing.JDialog {
     private javax.swing.JButton btnSil;
     private javax.swing.JComboBox<String> cmbIl;
     private javax.swing.JComboBox<String> cmbIlce;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cmbYonetici;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAdres;
@@ -315,9 +349,19 @@ public class frmDepartmanEkle extends javax.swing.JDialog {
     private javax.swing.JTextField txtTelefon;
     // End of variables declaration//GEN-END:variables
 
+    private void yoneticiDoldur() {
+        List<Kisi> yonetici = kisiService.getAll(null);
+        String[] kisiData = new String[yonetici.size()];
+        for (int i = 0; i < yonetici.size(); i++) {
+            kisiData[i] = yonetici.get(i).getAdSoyad();
+            cmbYonetici.addItem(yonetici.get(i).getAdSoyad());
+
+        }
+
+    }
+
     private void IlIlceComboDoldur() {
 
-        IlService ilService = new IlService();
         List<Il> il = ilService.getAll(null);
         String[] ilData = new String[il.size()];
         for (int i = 0; i < il.size(); i++) {
@@ -326,7 +370,6 @@ public class frmDepartmanEkle extends javax.swing.JDialog {
 
         }
 
-        IlceService ilceService = new IlceService();
         List<Ilce> ilce = ilceService.getAll(null);
         String[] ilceData = new String[il.size()];
         for (int i = 0; i < ilce.size(); i++) {

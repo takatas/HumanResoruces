@@ -38,6 +38,7 @@ public class Departman extends EBase {
         this.kod = kod;
         this.tanim = tanim;
         this.adres = adres;
+        //this.yonetici = yonetici;
     }
 
     public String getKod() {

@@ -118,18 +118,11 @@ public class frmLogin extends javax.swing.JDialog {
         KullaniciService ks = new KullaniciService();
         Kullanici kullanici = ks.getUsernameAndPassword(txtKullaniciAdi.getText(), txtSifre.getText());
         if (kullanici != null && kullanici.getId() != null) {
-            
-            
-            frmKisiEkle kisiEkle = new frmKisiEkle(null, true);
+
+            frmAnasayfa a = new frmAnasayfa(kullanici);
             this.dispose();
-            kisiEkle.show();
-            kisiEkle.setLocationRelativeTo(null);
-//            frmKullaniciEkle ekle = new frmKullaniciEkle(null, true);
-//            ekle.show();
-            
-//            frmAnasayfa a = new frmAnasayfa(kullanici);
-//            a.show();
-//            a.setLocationRelativeTo(null);
+            a.show();
+            a.setLocationRelativeTo(null);
 
         } else {
             JOptionPane.showMessageDialog(rootPane, "Kullanıcı Adı veya Şifre Hatalı");
@@ -154,13 +147,16 @@ public class frmLogin extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) { // şifre alanında enter a basılırsa login olması sağlandı.
             KullaniciService ks = new KullaniciService();
             Kullanici kullanici = ks.getUsernameAndPassword(txtKullaniciAdi.getText(), txtSifre.getText());
-//            frmAnasayfa anasayfa = new frmAnasayfa(kullanici);
-//            this.dispose();
-//            anasayfa.show();
-//            anasayfa.setLocationRelativeTo(null);
-            frmDepartmanEkle departmanEkle = new frmDepartmanEkle(null, true);
-            this.dispose();
-            departmanEkle.show();
+            if (kullanici != null && kullanici.getId() != null) {
+
+                frmAnasayfa a = new frmAnasayfa(kullanici);
+                this.dispose();
+                a.show();
+                a.setLocationRelativeTo(null);
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Kullanıcı Adı veya Şifre Hatalı");
+            }
         }
     }//GEN-LAST:event_txtSifreKeyPressed
 

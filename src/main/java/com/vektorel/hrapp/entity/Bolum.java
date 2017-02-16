@@ -30,6 +30,17 @@ public class Bolum extends EBase {
     Kisi bolumBsk;
     Adres adres;
 
+    public Bolum() {
+    }
+    
+    public Bolum(Long id, String kod, String tanim) {
+
+        this.setId(id);
+        this.kod = kod;
+        this.tanim = tanim;
+
+    }
+
     public String getKod() {
         return kod;
     }

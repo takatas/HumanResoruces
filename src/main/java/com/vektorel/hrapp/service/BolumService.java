@@ -32,11 +32,10 @@ public class BolumService implements IBaseService<Bolum> {
         }
         
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction= session.getTransaction();
+        Transaction trans = session.beginTransaction();
         session.save(entity);
-        transaction.commit();
+        trans.commit();
         session.close();
-        
         return true;
     }
 
@@ -50,7 +49,7 @@ public class BolumService implements IBaseService<Bolum> {
         }
         
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction= session.getTransaction();
+        Transaction transaction = session.beginTransaction();
         session.update(entity);
         transaction.commit();
         session.close();
@@ -63,7 +62,7 @@ public class BolumService implements IBaseService<Bolum> {
     public boolean delete(Bolum entity) throws Exception {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction= session.getTransaction();
+        Transaction transaction = session.beginTransaction();
         session.delete(entity);
         transaction.commit();
         session.close();

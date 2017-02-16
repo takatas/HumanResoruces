@@ -76,7 +76,7 @@ public class KisiService implements IBaseService<Kisi> {
     @Override
     public List<Kisi> getAll(String query) {
         
-        Session  session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Kisi.class);
         criteria.addOrder(Order.asc("id"));
         return criteria.list();

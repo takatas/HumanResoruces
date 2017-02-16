@@ -8,12 +8,16 @@ package com.vektorel.hrapp.ui;
 import com.vektorel.hrapp.entity.Cinsiyet;
 import com.vektorel.hrapp.entity.Il;
 import com.vektorel.hrapp.entity.Ilce;
+import com.vektorel.hrapp.entity.Kisi;
 import com.vektorel.hrapp.service.IlService;
 import com.vektorel.hrapp.service.IlceService;
 import com.vektorel.hrapp.service.KisiService;
 import com.vektorel.hrapp.util.DefaultComboModel;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,14 +25,18 @@ import java.util.List;
  */
 public class frmKisiEkle extends javax.swing.JDialog {
 
+    KisiService kisiService = new KisiService();
+
     /**
      * Creates new form frmKisiEkle
      */
     public frmKisiEkle(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+        lblKisiId.setVisible(false);
+        kisiTabloyuDoldur();
         IlIlceComboDoldur();
+        comboInit();
     }
 
     /**
@@ -68,7 +76,8 @@ public class frmKisiEkle extends javax.swing.JDialog {
         btnKisiSil = new javax.swing.JButton();
         btnKisiKapat = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblKisiListesi = new javax.swing.JTable();
+        lblKisiId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -108,12 +117,22 @@ public class frmKisiEkle extends javax.swing.JDialog {
         jScrollPane1.setViewportView(txtAdres);
 
         btnKisiGuncelle.setText("Güncelle");
+        btnKisiGuncelle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKisiGuncelleActionPerformed(evt);
+            }
+        });
 
         btnKisiSil.setText("Sil");
+        btnKisiSil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKisiSilActionPerformed(evt);
+            }
+        });
 
         btnKisiKapat.setText("Kapat");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblKisiListesi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -124,7 +143,7 @@ public class frmKisiEkle extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tblKisiListesi);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,10 +188,15 @@ public class frmKisiEkle extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(cmbCinsiyet, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnKisiSil, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnKisiKapat)
-                                .addGap(0, 5, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnKisiSil, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnKisiKapat)
+                                        .addGap(0, 5, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblKisiId, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -231,10 +255,12 @@ public class frmKisiEkle extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCinsiyet)
-                            .addComponent(cmbCinsiyet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAdres))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblKisiId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblCinsiyet)
+                                .addComponent(cmbCinsiyet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblAdres)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnKisiKaydet)
@@ -251,7 +277,6 @@ public class frmKisiEkle extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKisiKaydetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKisiKaydetActionPerformed
-        KisiService kisiService = new KisiService();
         String ad = txtAd.getText();
         String soyAd = txtSoyad.getText();
         Long tcNo = new Long(txtTcNo.getText());
@@ -264,13 +289,64 @@ public class frmKisiEkle extends javax.swing.JDialog {
         DefaultComboModel cinsiyetModel = (DefaultComboModel) cmbCinsiyet.getSelectedItem();
         Cinsiyet cinsiyet = Cinsiyet.getEnum(cinsiyetModel.getValue().intValue());
 
-        //DefaultComboModel ilModel = (DefaultComboModel) cmbCinsiyet.getSelectedItem();
-//        IlService ilService = new IlService();
-//        Il il = ilService.getById(cmbIl.getSelectedItem());
+        IlService ilService = new IlService();
+        Il il = ilService.getByIlAdi(cmbIl.getSelectedItem().toString());
 
-        //kisiService.save(entity);
+        IlceService ilceService = new IlceService();
+        Ilce ilce = ilceService.getByIlceAdi(cmbIlce.getSelectedItem().toString());
+
+        try {
+            if (lblKisiId.getText().trim().equals("")) {
+                kisiService.save(new Kisi(null, ad, soyAd, tcNo, anneAd, babaAd, adres, telefon, dogumTarih, cinsiyet, il, ilce));
+            } else {
+                kisiService.update(new Kisi(new Long(lblKisiId.getText()), ad, soyAd, tcNo, anneAd, babaAd, adres, telefon, dogumTarih, cinsiyet, il, ilce));
+            }
+            kisiTabloyuDoldur();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }//GEN-LAST:event_btnKisiKaydetActionPerformed
+
+    private void btnKisiGuncelleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKisiGuncelleActionPerformed
+        int seciliKayit = tblKisiListesi.getSelectedRow();
+        if (seciliKayit > -1) {
+            String value = tblKisiListesi.getValueAt(seciliKayit, 0).toString();
+            Kisi kisi = kisiService.getById(new Long(value));
+
+            lblKisiId.setText(kisi.getId().toString());
+            txtAd.setText(kisi.getAd());
+            txtSoyad.setText(kisi.getSoyad());
+            txtTcNo.setText(kisi.getTc().toString());
+            txtAnneAdi.setText(kisi.getAnaAdi());
+            txtBabaAdi.setText(kisi.getBabaAdi());
+            txtTelefon.setText(kisi.getTel());
+            txtAdres.setText(kisi.getAcikAdres());
+            dcDogumTarihi.setDate(kisi.getDogumTarihi());
+            comboInit();
+            IlIlceComboDoldur();
+
+        }
+
+    }//GEN-LAST:event_btnKisiGuncelleActionPerformed
+
+    private void btnKisiSilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKisiSilActionPerformed
+        try {
+            int seciliKayit = tblKisiListesi.getSelectedRow();
+            if (seciliKayit > -1) {
+                String value = tblKisiListesi.getValueAt(seciliKayit, 0).toString();
+                Kisi kisi = kisiService.getById(new Long(value));
+                int a = JOptionPane.showConfirmDialog(rootPane, "Seçili Kaydı Silmek istiyor musunuz?", "Sil", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (a == 0) {
+                    kisiService.delete(kisi);
+                    kisiTabloyuDoldur();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        }
+    }//GEN-LAST:event_btnKisiSilActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,7 +365,6 @@ public class frmKisiEkle extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAd;
     private javax.swing.JLabel lblAdres;
     private javax.swing.JLabel lblAnneAdi;
@@ -298,7 +373,9 @@ public class frmKisiEkle extends javax.swing.JDialog {
     private javax.swing.JLabel lblDogumTarihi;
     private javax.swing.JLabel lblIl;
     private javax.swing.JLabel lblIlce;
+    private javax.swing.JLabel lblKisiId;
     private javax.swing.JLabel lblTcNo;
+    private javax.swing.JTable tblKisiListesi;
     private javax.swing.JTextField txtAd;
     private javax.swing.JTextArea txtAdres;
     private javax.swing.JTextField txtAnneAdi;
@@ -322,12 +399,51 @@ public class frmKisiEkle extends javax.swing.JDialog {
         IlceService ilceService = new IlceService();
         List<Ilce> ilce = ilceService.getAll(null);
         String[] ilceData = new String[il.size()];
-        for (int i = 0; i < il.size(); i++) {
+        for (int i = 0; i < ilce.size(); i++) {
             ilceData[i] = ilce.get(i).getAd();
             cmbIlce.addItem(ilce.get(i).getAd());
 
         }
 
+    }
+
+    private void kisiTabloyuDoldur() {
+        List<Kisi> kisi = kisiService.getAll(null);
+        String[][] data = new String[kisi.size()][8];
+        for (int i = 0; i < kisi.size(); i++) {
+            data[i][0] = kisi.get(i).getId().toString();
+            data[i][1] = kisi.get(i).getAdSoyad();
+            data[i][2] = kisi.get(i).getTc().toString();
+            data[i][3] = kisi.get(i).getAnaAdi();
+            data[i][4] = kisi.get(i).getBabaAdi();
+            if (kisi.get(i).getDogumTarihi() != null) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+                data[i][5] = sdf.format(kisi.get(i).getDogumTarihi());
+            }
+            if (kisi.get(i).getCinsiyet() != null) {
+                data[i][6] = kisi.get(i).getCinsiyet().getLabel();
+            }
+            if (kisi.get(i).getIlIlce() != null) {
+                data[i][7] = kisi.get(i).getIlIlce();
+            }
+        }
+
+        tblKisiListesi.setModel(new javax.swing.table.DefaultTableModel(
+                data,
+                new String[]{
+                    "Id",
+                    "Ad Soyad", "TC No", "Ana Adı", "Baba Adı", "Doğum Tarihi", "Cinsiyet", "İl - İlçe"
+                }
+        ));
+    }
+
+    private void comboInit() {
+        DefaultComboModel[] dizi = new DefaultComboModel[3];
+        for (int i = 0; i < Cinsiyet.values().length; i++) {
+            String label = Cinsiyet.values()[i].getLabel();
+            dizi[i] = new DefaultComboModel(new Long(i), label);
+        }
+        cmbCinsiyet.setModel(new DefaultComboBoxModel(dizi));
     }
 
 }

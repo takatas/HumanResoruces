@@ -154,11 +154,13 @@ public class frmLogin extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) { // şifre alanında enter a basılırsa login olması sağlandı.
             KullaniciService ks = new KullaniciService();
             Kullanici kullanici = ks.getUsernameAndPassword(txtKullaniciAdi.getText(), txtSifre.getText());
-            frmAnasayfa anasayfa = new frmAnasayfa(kullanici);
+//            frmAnasayfa anasayfa = new frmAnasayfa(kullanici);
+//            this.dispose();
+//            anasayfa.show();
+//            anasayfa.setLocationRelativeTo(null);
+            frmIlIlceTablo ilIlceTablo = new frmIlIlceTablo();
             this.dispose();
-            anasayfa.show();
-            anasayfa.setLocationRelativeTo(null);
-
+            ilIlceTablo.show();
         }
     }//GEN-LAST:event_txtSifreKeyPressed
 

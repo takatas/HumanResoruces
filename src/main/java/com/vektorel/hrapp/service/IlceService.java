@@ -97,4 +97,11 @@ public class IlceService implements IBaseService<Ilce> {
         return (Ilce) criteria.uniqueResult();
     }
 
+    public Ilce getByIlceAdi(String ad) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Ilce.class);
+        criteria.add(Restrictions.eq("ad", ad));
+
+        return (Ilce) criteria.uniqueResult();
+    }
 }

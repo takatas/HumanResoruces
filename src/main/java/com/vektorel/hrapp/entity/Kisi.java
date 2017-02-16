@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 /**
@@ -24,9 +26,9 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "gnl_kisi")
-@SequenceGenerator(allocationSize = 1,name = "default_id_generator",sequenceName = "seq_kisi")
-public class Kisi extends EBase{
-    
+@SequenceGenerator(allocationSize = 1, name = "default_id_generator", sequenceName = "seq_kisi")
+public class Kisi extends EBase {
+
     private String ad;
     private String soyad;
     private Date dogumTarihi;
@@ -41,6 +43,27 @@ public class Kisi extends EBase{
     private String adSoyad;
     private int yas;
 
+    public Kisi() {
+    }
+
+    public Kisi(Long id, String ad, String soyAd, Long tcNo, String anneAd, String babaAd, String adres, String telefon, Date dogumTarih, Cinsiyet cinsiyet, Il il, Ilce ilce) {
+
+        this.setId(id);
+        this.ad = ad;
+        this.soyad = soyAd;
+        this.tc = tcNo;
+        this.anaAdi = anneAd;
+        this.babaAdi = babaAd;
+        this.acikAdres = adres;
+        this.tel = telefon;
+        this.dogumTarihi = dogumTarih;
+        this.cinsiyet = cinsiyet;
+        this.il = il;
+        this.ilce = ilce;
+
+    }
+
+    @Column(name = "ad")
     public String getAd() {
         return ad;
     }
@@ -49,6 +72,7 @@ public class Kisi extends EBase{
         this.ad = ad;
     }
 
+    @Column(name = "soyad")
     public String getSoyad() {
         return soyad;
     }
@@ -57,6 +81,8 @@ public class Kisi extends EBase{
         this.soyad = soyad;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "dogumtarihi")
     public Date getDogumTarihi() {
         return dogumTarihi;
     }
@@ -65,6 +91,7 @@ public class Kisi extends EBase{
         this.dogumTarihi = dogumTarihi;
     }
 
+    @Column(name = "tc")
     public Long getTc() {
         return tc;
     }
@@ -73,6 +100,7 @@ public class Kisi extends EBase{
         this.tc = tc;
     }
 
+    @Column(name = "babaadi")
     public String getBabaAdi() {
         return babaAdi;
     }
@@ -81,6 +109,7 @@ public class Kisi extends EBase{
         this.babaAdi = babaAdi;
     }
 
+    @Column(name = "anaadi")
     public String getAnaAdi() {
         return anaAdi;
     }
@@ -100,7 +129,7 @@ public class Kisi extends EBase{
     }
 
     @JoinColumn(name = "il_id")
-    @ManyToOne(optional = true,fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     public Il getIl() {
         return il;
     }
@@ -110,7 +139,7 @@ public class Kisi extends EBase{
     }
 
     @JoinColumn(name = "ilce_id")
-    @ManyToOne(optional = true,fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     public Ilce getIlce() {
         return ilce;
     }
@@ -119,6 +148,7 @@ public class Kisi extends EBase{
         this.ilce = ilce;
     }
 
+    @Column(name = "acikadres")
     public String getAcikAdres() {
         return acikAdres;
     }
@@ -127,6 +157,7 @@ public class Kisi extends EBase{
         this.acikAdres = acikAdres;
     }
 
+    @Column(name = "tel")
     public String getTel() {
         return tel;
     }
@@ -135,19 +166,19 @@ public class Kisi extends EBase{
         this.tel = tel;
     }
 
-    @Transient
+    @Transient // db ye alan oluşturmaz. hesaplama yapar.
     public String getAdSoyad() {
-        return this.ad+" "+this.soyad;
+        return this.ad + " " + this.soyad;
     }
-    
+
     public void setAdSoyad(String adSoyad) {
         this.adSoyad = adSoyad;
     }
 
     @Transient
     public int getYas() {
-        if(this.dogumTarihi!=null){
-            return new Date().getYear()-this.dogumTarihi.getYear();
+        if (this.dogumTarihi != null) {
+            return new Date().getYear() - this.dogumTarihi.getYear();
         }
         return -1;
     }
@@ -156,9 +187,20 @@ public class Kisi extends EBase{
         this.yas = yas;
     }
 
+    @Transient
+    public String getIlIlce() {
+        if (this.il != null) {
+            String il = this.il.getAd();
+            String ilce = this.ilce.getAd();
+
+            return il + " - " + ilce;
+        } else
+            return "";
+    }
+
     @Override
     public String toString() {
-        return "Kisi{" + "id=" + getId()  + "ad=" + ad + ", soyad=" + soyad + ", dogumTarihi=" + dogumTarihi + ", tc=" + tc + ", babaAdi=" + babaAdi + ", anaAdi=" + anaAdi + ", cinsiyet=" + cinsiyet + ", il=" + il + ", ilce=" + ilce + ", acikAdres=" + acikAdres + ", tel=" + tel + ", adSoyad=" + getAdSoyad() + ", yas=" + getYas() + '}';
+        return "Kisi{" + "id=" + getId() + "ad=" + ad + ", soyad=" + soyad + ", dogumTarihi=" + dogumTarihi + ", tc=" + tc + ", babaAdi=" + babaAdi + ", anaAdi=" + anaAdi + ", cinsiyet=" + cinsiyet + ", il=" + il + ", ilce=" + ilce + ", acikAdres=" + acikAdres + ", tel=" + tel + ", adSoyad=" + getAdSoyad() + ", yas=" + getYas() + '}';
     }
-    
+
 }

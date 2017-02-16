@@ -158,9 +158,9 @@ public class frmLogin extends javax.swing.JDialog {
 //            this.dispose();
 //            anasayfa.show();
 //            anasayfa.setLocationRelativeTo(null);
-            frmBolumEkle bolumEkle = new frmBolumEkle(null, true);
+            frmDepartmanEkle departmanEkle = new frmDepartmanEkle(null, true);
             this.dispose();
-            bolumEkle.show();
+            departmanEkle.show();
         }
     }//GEN-LAST:event_txtSifreKeyPressed
 

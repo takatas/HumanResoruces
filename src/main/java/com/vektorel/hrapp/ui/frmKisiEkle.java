@@ -106,6 +106,12 @@ public class frmKisiEkle extends javax.swing.JDialog {
 
         lblIl.setText("İl");
 
+        cmbIl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbIlActionPerformed(evt);
+            }
+        });
+
         lblIlce.setText("İlçe");
 
         jLabel2.setText("Telefon");
@@ -324,8 +330,6 @@ public class frmKisiEkle extends javax.swing.JDialog {
             txtAdres.setText(kisi.getAcikAdres());
             dcDogumTarihi.setDate(kisi.getDogumTarihi());
             comboInit();
-            IlIlceComboDoldur();
-
         }
 
     }//GEN-LAST:event_btnKisiGuncelleActionPerformed
@@ -347,6 +351,10 @@ public class frmKisiEkle extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
     }//GEN-LAST:event_btnKisiSilActionPerformed
+
+    private void cmbIlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbIlActionPerformed
+        
+    }//GEN-LAST:event_cmbIlActionPerformed
 
     /**
      * @param args the command line arguments

@@ -22,12 +22,23 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "gnl_departman")
-@SequenceGenerator(allocationSize = 1,name = "default_id_generator",sequenceName = "seq_departman")
-public class Departman  extends EBase{
+@SequenceGenerator(allocationSize = 1, name = "default_id_generator", sequenceName = "seq_departman")
+public class Departman extends EBase {
+
     String kod;
     Adres adres;
     Kisi yonetici;
     String tanim;
+
+    public Departman() {
+    }
+
+    public Departman(Long id, String kod, String tanim, Adres adres) {
+        this.setId(id);
+        this.kod = kod;
+        this.tanim = tanim;
+        this.adres = adres;
+    }
 
     public String getKod() {
         return kod;
@@ -63,6 +74,5 @@ public class Departman  extends EBase{
     public void setTanim(String tanim) {
         this.tanim = tanim;
     }
-    
-    
+
 }

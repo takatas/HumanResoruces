@@ -46,7 +46,7 @@
         <Component class="javax.swing.JTree" name="treeMenu">
           <Properties>
             <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-              <TreeModel code="&#x130;nsan Kaynaklar&#x131;&#xa; Tan&#x131;mlar&#xa;  Kullan&#x131;c&#x131; Ekle/G&#xfc;ncelle&#xa;  &#x130;l - &#x130;l&#xe7;e Ekle/G&#xfc;ncelle&#xa;  Ki&#x15f;i Ekle/G&#xfc;ncelle&#xa;  B&#xf6;l&#xfc;m Ekle/G&#xfc;ncelle&#xa;  Departman Ekle/G&#xfc;ncelle&#xa; Ba&#x15f;vuru &#x130;&#x15f;lemleri&#xa;  CV&#xa;  CV Listesi&#xa;  &#x130;&#x15f; Ba&#x15f;vurusu&#xa;"/>
+              <TreeModel code="&#x130;nsan Kaynaklar&#x131;&#xa; Tan&#x131;mlar&#xa;  Kullan&#x131;c&#x131; Ekle&#xa;  &#x130;l Ekle&#xa;  &#x130;l&#xe7;e Ekle&#xa;  Ki&#x15f;i Ekle&#xa;  B&#xf6;l&#xfc;m Ekle&#xa;  Departman Ekle&#xa;  Okul Ekle&#xa; Ba&#x15f;vuru &#x130;&#x15f;lemleri&#xa;  Cv&#xa;  Cv Listesi&#xa;  &#x130;&#x15f; Ba&#x15f;vurusu&#xa;"/>
             </Property>
           </Properties>
           <Events>

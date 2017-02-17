@@ -51,6 +51,7 @@ public class frmCvListesi extends javax.swing.JFrame {
         pnlCvListesi = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCvListesi = new javax.swing.JTable();
+        btnIptal = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuCvListesi = new javax.swing.JMenuItem();
@@ -75,17 +76,30 @@ public class frmCvListesi extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblCvListesi);
 
+        btnIptal.setText("İptal");
+        btnIptal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIptalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlCvListesiLayout = new javax.swing.GroupLayout(pnlCvListesi);
         pnlCvListesi.setLayout(pnlCvListesiLayout);
         pnlCvListesiLayout.setHorizontalGroup(
             pnlCvListesiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCvListesiLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnIptal)
+                .addGap(38, 38, 38))
         );
         pnlCvListesiLayout.setVerticalGroup(
             pnlCvListesiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCvListesiLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnIptal)
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         jMenu1.setText("CV İşlemleri");
@@ -192,8 +206,13 @@ public class frmCvListesi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnuCvGuncelleActionPerformed
 
+    private void btnIptalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIptalActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnIptalActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIptal;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;

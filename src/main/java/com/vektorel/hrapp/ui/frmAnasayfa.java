@@ -47,21 +47,25 @@ public class frmAnasayfa extends javax.swing.JFrame {
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("İnsan Kaynakları");
         javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Tanımlar");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Kullanıcı Ekle/Güncelle");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Kullanıcı Ekle");
         treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("İl - İlçe Ekle/Güncelle");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("İl Ekle");
         treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Kişi Ekle/Güncelle");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("İlçe Ekle");
         treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Bölüm Ekle/Güncelle");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Kişi Ekle");
         treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Departman Ekle/Güncelle");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Bölüm Ekle");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Departman Ekle");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Okul Ekle");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Başvuru İşlemleri");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("CV");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Cv");
         treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("CV Listesi");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Cv Listesi");
         treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("İş Başvurusu");
         treeNode2.add(treeNode3);
@@ -94,43 +98,60 @@ public class frmAnasayfa extends javax.swing.JFrame {
 
         String menu = treeMenu.getLastSelectedPathComponent().toString();
 
-        if (menu.equals("Kullanıcı Ekle/Güncelle")) {
+        if (menu.equals("Kullanıcı Ekle")) {
             frmKullaniciEkle kullaniciEkle = new frmKullaniciEkle(null, true);
             kullaniciEkle.show();
             kullaniciEkle.setLocationRelativeTo(null);
         }
 
-        if (menu.equals("İl - İlçe Ekle/Güncelle")) {
+        if (menu.equals("İl Ekle")) {
             try {
-                frmIlIlceTablo ilIlceTablo = new frmIlIlceTablo(null, true);
-                ilIlceTablo.show();
-                ilIlceTablo.setLocationRelativeTo(null);
+                frmIlEkle ilEkle = new frmIlEkle(null, true);
+                ilEkle.show();
+                ilEkle.setLocationRelativeTo(null);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(rootPane, e.getMessage());
             }
 
         }
-        if (menu.equals("Kişi Ekle/Güncelle")) {
+        if (menu.equals("İlçe Ekle")) {
+            try {
+                frmIlceEkle ilceEkle = new frmIlceEkle(null, true);
+                ilceEkle.show();
+                ilceEkle.setLocationRelativeTo(null);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            }
+
+        }
+
+        if (menu.equals("Kişi Ekle")) {
             frmKisiEkle kisiEkle = new frmKisiEkle(null, true);
             kisiEkle.show();
             kisiEkle.setLocationRelativeTo(null);
         }
-        if (menu.equals("Bölüm Ekle/Güncelle")) {
+        if (menu.equals("Bölüm Ekle")) {
             frmBolumEkle bolumEkle = new frmBolumEkle(null, true);
             bolumEkle.show();
             bolumEkle.setLocationRelativeTo(null);
         }
-        if (menu.equals("Departman Ekle/Güncelle")) {
+        if (menu.equals("Departman Ekle")) {
             frmDepartmanEkle departmanEkle = new frmDepartmanEkle(null, true);
             departmanEkle.show();
             departmanEkle.setLocationRelativeTo(null);
         }
+        if (menu.equals("Okul Ekle")) {
+            frmOkulEkle okulEkle = new frmOkulEkle(null, true);
+            okulEkle.show();
+            okulEkle.setLocationRelativeTo(null);
+        }
+
         if (menu.equals("Cv")) {
             frmCv cv = new frmCv();
             cv.show();
             cv.setLocationRelativeTo(null);
         }
-        if (menu.equals("CV Listesi")) {
+        if (menu.equals("Cv Listesi")) {
             frmCvListesi cvListesi = new frmCvListesi();
             cvListesi.show();
             cvListesi.setLocationRelativeTo(null);

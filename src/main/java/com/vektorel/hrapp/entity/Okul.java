@@ -24,6 +24,16 @@ public class Okul extends EBase{
     String adi;
     Adres adres;
 
+    public Okul() {
+    }
+    
+    public Okul(Long id, String kod, String ad, Adres adres) {
+        this.setId(id);
+        this.kod = kod;
+        this.adi = ad;
+        this.adres = adres;
+    }
+
     public String getKod() {
         return kod;
     }

@@ -7,12 +7,16 @@ package com.vektorel.hrapp.ui;
 
 import com.vektorel.hrapp.service.IlService;
 import com.vektorel.hrapp.entity.Il;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author vektorel
  */
 public class frmIlEkle extends javax.swing.JDialog {
+
+    IlService ilService = new IlService();
 
     /**
      * Creates new form NewJDialog
@@ -21,13 +25,14 @@ public class frmIlEkle extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        IlTabloyuDoldur();
     }
-    
-        frmIlEkle(java.awt.Frame parent, boolean modal, Il il) {
+
+    frmIlEkle(java.awt.Frame parent, boolean modal, Il il) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        
+
         lblIlId.setText(il.getId().toString());
         txtIlAd.setText(il.getAd());
         txtIlKod.setText(il.getKod());
@@ -50,6 +55,10 @@ public class frmIlEkle extends javax.swing.JDialog {
         btnIlKaydet = new javax.swing.JButton();
         btnIlIptal = new javax.swing.JButton();
         lblIlId = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblIl = new javax.swing.JTable();
+        btnGuncelle = new javax.swing.JButton();
+        btnSil = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,6 +80,33 @@ public class frmIlEkle extends javax.swing.JDialog {
             }
         });
 
+        tblIl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblIl);
+
+        btnGuncelle.setText("Guncelle");
+        btnGuncelle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuncelleActionPerformed(evt);
+            }
+        });
+
+        btnSil.setText("Sil");
+        btnSil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSilActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,23 +114,30 @@ public class frmIlEkle extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblIlKod)
-                    .addComponent(lblIlAd))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblIlId, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                    .addComponent(txtIlAd)
-                    .addComponent(txtIlKod)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnIlIptal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                        .addComponent(btnIlKaydet)))
-                .addContainerGap(71, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblIlKod)
+                            .addComponent(lblIlAd))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblIlId, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                            .addComponent(txtIlAd)
+                            .addComponent(txtIlKod)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnIlKaydet)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGuncelle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSil)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnIlIptal)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(lblIlId, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -107,8 +150,11 @@ public class frmIlEkle extends javax.swing.JDialog {
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIlKaydet)
-                    .addComponent(btnIlIptal))
-                .addContainerGap(146, Short.MAX_VALUE))
+                    .addComponent(btnIlIptal)
+                    .addComponent(btnGuncelle)
+                    .addComponent(btnSil))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -122,7 +168,7 @@ public class frmIlEkle extends javax.swing.JDialog {
             } else {
                 ilService.update(new Il(new Long(lblIlId.getText()), txtIlKod.getText(), txtIlAd.getText()));
             }
-            this.dispose();
+            IlTabloyuDoldur();
 
         } catch (Exception e) {
             e.getMessage();
@@ -134,17 +180,70 @@ public class frmIlEkle extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnIlIptalActionPerformed
 
+    private void btnGuncelleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuncelleActionPerformed
+        int seciliKayit = tblIl.getSelectedRow();
+        if (seciliKayit > -1) {
+            String value = tblIl.getValueAt(seciliKayit, 0).toString();
+            Il il = ilService.getById(new Long(value));
+
+            lblIlId.setText(il.getId().toString());
+            txtIlKod.setText(il.getKod());
+            txtIlAd.setText(il.getAd());
+        }
+    }//GEN-LAST:event_btnGuncelleActionPerformed
+
+    private void btnSilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSilActionPerformed
+        try {
+
+            int seciliKayit = tblIl.getSelectedRow();
+            if (seciliKayit > -1) {
+                int silisinMi = (JOptionPane.showConfirmDialog(rootPane, "Silmek İstediğinize Emin misiniz?"));
+                if (silisinMi == 0) {
+                    String value = tblIl.getValueAt(seciliKayit, 0).toString();
+                    Il il = ilService.getById(new Long(value));
+                    ilService.delete(il);
+                    IlTabloyuDoldur();
+                }
+            }
+
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }//GEN-LAST:event_btnSilActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuncelle;
     private javax.swing.JButton btnIlIptal;
     private javax.swing.JButton btnIlKaydet;
+    private javax.swing.JButton btnSil;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblIlAd;
     private javax.swing.JLabel lblIlId;
     private javax.swing.JLabel lblIlKod;
+    private javax.swing.JTable tblIl;
     private javax.swing.JTextField txtIlAd;
     private javax.swing.JTextField txtIlKod;
     // End of variables declaration//GEN-END:variables
+    private void IlTabloyuDoldur() {
+        //tablo doldur
+        List<Il> il = ilService.getAll(null);
+        String[][] data = new String[il.size()][6];
+        for (int i = 0; i < il.size(); i++) {
+            data[i][0] = il.get(i).getId().toString();
+            data[i][1] = il.get(i).getKod();
+            data[i][2] = il.get(i).getAd();
+        }
+        tblIl.setModel(new javax.swing.table.DefaultTableModel(
+                data,
+                new String[]{
+                    "İd", "İl Kodu", "İl Adı"
+                }
+        ));
+
+    }
+
 }

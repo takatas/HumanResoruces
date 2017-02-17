@@ -297,8 +297,8 @@ public class frmIlIlceTablo extends javax.swing.JDialog {
         if (seciliKayit > -1) {
             String value = tblIlIlce.getValueAt(seciliKayit, 0).toString();
             Ilce ilce = ilceService.getById(new Long(value));
-            frmIlceEkle guncelle = new frmIlceEkle(null, true, ilce);
-            guncelle.show();
+//            frmIlceEkle guncelle = new frmIlceEkle();
+//            guncelle.show();
             IlceTabloyuDoldur();
         }
     }

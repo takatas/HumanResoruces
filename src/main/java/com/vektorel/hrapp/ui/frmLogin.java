@@ -62,12 +62,14 @@ public class frmLogin extends javax.swing.JDialog {
             }
         });
 
+        txtKullaniciAdi.setText("takatas");
         txtKullaniciAdi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKullaniciAdiKeyPressed(evt);
             }
         });
 
+        txtSifre.setText("99");
         txtSifre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSifreKeyPressed(evt);

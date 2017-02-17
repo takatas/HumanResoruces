@@ -37,6 +37,7 @@ public class frmDepartmanEkle extends javax.swing.JDialog {
         initComponents();
         IlIlceComboDoldur();
         departmanTabloyuDoldur();
+        setLocationRelativeTo(null);
         //yoneticiDoldur();
     }
 
